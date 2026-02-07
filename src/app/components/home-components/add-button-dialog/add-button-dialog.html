@@ -1,0 +1,33 @@
+<mat-dialog-content>
+    <div class="dialog-header">
+        <h1>Cadastrar Exame</h1>
+    </div>
+    <div class="corpo-dialog">
+        <div class="corpo-dialog-linha">
+            <mat-form-field class="corpo-input">
+                <mat-label>Nome do paciente</mat-label>
+                <input matInput [(ngModel)]="animal" />
+            </mat-form-field>
+            <mat-form-field class="corpo-input">
+                <mat-label>CPF do paciente</mat-label>
+                <input matInput [(ngModel)]="animal" />
+            </mat-form-field>
+            <mat-form-field class="corpo-input">
+                <mat-label>Data do Exame</mat-label>
+                <input matInput [(ngModel)]="animal" />
+            </mat-form-field>
+            <mat-form-field class="corpo-input">
+                <mat-label>Tipo do Exame</mat-label>
+                <input matInput [(ngModel)]="animal" />
+            </mat-form-field>
+            <mat-form-field class="corpo-input">
+                <mat-label>Status</mat-label>
+                <input matInput [(ngModel)]="animal" />
+            </mat-form-field>
+        </div>
+    </div>
+</mat-dialog-content>
+<mat-dialog-actions>
+    <button matButton (click)="onNoClick()">Fechar</button>
+    <button matButton [mat-dialog-close]="animal()" cdkFocusInitial>Cadastrar</button>
+</mat-dialog-actions>

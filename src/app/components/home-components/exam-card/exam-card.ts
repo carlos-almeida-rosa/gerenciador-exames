@@ -1,26 +1,12 @@
 
 import { MatCardModule } from '@angular/material/card';
 import { ChangeDetectionStrategy, Component, inject, model, signal } from '@angular/core';
-import { MatIconModule } from '@angular/material/icon';
-import { MatDividerModule } from '@angular/material/divider';
-import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import {
-  MAT_DIALOG_DATA,
   MatDialog,
-  MatDialogActions,
-  MatDialogClose,
-  MatDialogContent,
-  MatDialogRef,
-  MatDialogTitle,
 } from '@angular/material/dialog';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
-
-export interface DialogData {
-  animal: string;
-  name: string;
-}
+import { OpenCardInfoButtonDialog } from '../open-card-info-button-dialog/open-card-info-button-dialog';
+import { DeleteCardButtonDialog } from '../delete-card-button-dialog/delete-card-button-dialog';
 
 @Component({
   selector: 'app-exam-card',
@@ -42,15 +28,15 @@ export class ExamCard {
   readonly name = model('');
 
   openDeleteDialog(enterAnimationDuration: string, exitAnimationDuration: string): void {
-    this.dialog.open(DialogAnimationsExampleDialog, {
+    this.dialog.open(DeleteCardButtonDialog, {
       width: '250px',
       enterAnimationDuration,
       exitAnimationDuration,
     });
   }
 
-  openInfoDialog(): void {
-    const dialogRef = this.dialog.open(DialogOverviewExampleDialog, {
+  openInfoExamDialog(): void {
+    const dialogRef = this.dialog.open(OpenCardInfoButtonDialog, {
       data: { name: this.name(), animal: this.animal() },
     });
 
@@ -63,36 +49,4 @@ export class ExamCard {
   }
 }
 
-@Component({
-  selector: 'dialog-animations-example-dialog',
-  templateUrl: 'dialog-animations-example-dialog.html',
-  imports: [MatButtonModule, MatDialogActions, MatDialogClose, MatDialogTitle, MatDialogContent],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-})
-export class DialogAnimationsExampleDialog {
-  readonly dialogRef = inject(MatDialogRef<DialogAnimationsExampleDialog>);
-}
 
-@Component({
-  selector: 'dialog-overview-example-dialog',
-  templateUrl: 'dialog-overview-example-dialog.html',
-  imports: [
-    MatFormFieldModule,
-    MatInputModule,
-    FormsModule,
-    MatButtonModule,
-    MatDialogTitle,
-    MatDialogContent,
-    MatDialogActions,
-    MatDialogClose,
-  ],
-})
-export class DialogOverviewExampleDialog {
-  readonly dialogRef = inject(MatDialogRef<DialogOverviewExampleDialog>);
-  readonly data = inject<DialogData>(MAT_DIALOG_DATA);
-  readonly animal = model(this.data.animal);
-
-  onNoClick(): void {
-    this.dialogRef.close();
-  }
-}
