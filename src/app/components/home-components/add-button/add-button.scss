@@ -1,0 +1,18 @@
+:host {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    z-index: 1000;
+}
+
+.add-button {
+    background-color: rgb(233, 107, 107);
+}
+
+section {
+    display: flex;
+}
+
+.example-flex-container {
+    display: flex;
+}

@@ -1,0 +1,29 @@
+$largura-padrao: 400px;
+
+:host {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  width: 100%;
+  background-color: #f0f2f5; 
+}
+
+.form-container {
+  width: $largura-padrao;
+  padding: 2rem;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  align-items: center;
+
+  input {
+    width: 100%;
+    padding: 12px;
+    box-sizing: border-box;
+  }
+}

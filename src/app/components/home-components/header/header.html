@@ -1,0 +1,11 @@
+<mat-toolbar class="home-header">
+  <span>Exames</span>
+  <span class="example-spacer"></span>
+  <button matButton [matMenuTriggerFor]="menu">
+    <mat-icon>account_circle</mat-icon>
+  </button>
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item>Editar</button>
+    <button mat-menu-item>Sair</button>
+  </mat-menu>
+</mat-toolbar>

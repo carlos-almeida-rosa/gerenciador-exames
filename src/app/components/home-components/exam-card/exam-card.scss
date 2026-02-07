@@ -1,0 +1,38 @@
+:host {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.exam-card {
+  width: 400px; // Largura fixa para os cards
+  
+  .header-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px;
+  }
+}
+
+.cards-container {
+  display: flex;
+  flex-direction: column; // Um card embaixo do outro
+  gap: 20px;              // Espaço entre cada card
+  padding: 20px;
+}
+
+.example-header-image {
+  background-image: url('https://material.angular.dev/assets/img/examples/shiba1.jpg');
+  background-size: cover;
+}
+
+.card-actions {
+  display: flex;
+  flex-direction: column;
+}
+
+button {
+  margin-right: 8px;
+}
