@@ -26,19 +26,22 @@ public class GerenciadorexamesApplication {
 			examRepository.deleteAll();
 			userRepository.deleteAll();
 
-			Exam e = new Exam();
-			e.setName("Carlos Eduardo Silva");
-			e.setCpf("123.456.789-00");
-			e.setData(LocalDate.parse("2026-02-08"));
-			e.setType(ExamType.SANGUE.getDescricao());
-			e.setStatus(ExamStatus.EM_ANDAMENTO.getDescricao());
-			examRepository.save(e);
+      Exam e = Exam.builder()
+        .name("Carlos Eduardo Silva")
+        .cpf("123.456.789-00")
+        .data(LocalDate.parse("2026-02-08"))
+        .status(ExamStatus.EM_ANDAMENTO.getDescricao())
+        .type(ExamType.SANGUE.getDescricao())
+        .build();
+      examRepository.save(e);
 
-			User u = new User();
-			u.setName("Leandro Vilela");
-			u.setEmail("leandro@gmail.com");
-			u.setPassword("123456");
-			userRepository.save(u);
+      User u = User.builder()
+        .name("Leandro Vilela")
+        .email("leandro@gmail.com")
+        .password("123456")
+        .build();
+      userRepository.save(u);
+
 		};
 	}
 }

@@ -4,13 +4,13 @@ import { MatButtonModule } from '@angular/material/button';
 import {
   MAT_DIALOG_DATA,
   MatDialogActions,
-  MatDialogClose,
   MatDialogContent,
   MatDialogRef,
-  MatDialogTitle,
 } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { Exam } from '../../../models/exam';
+import { ExamService } from '../../../services/exam';
 
 export interface DialogData {
   animal: string;
@@ -26,18 +26,42 @@ export interface DialogData {
     MatInputModule,
     FormsModule,
     MatButtonModule,
-    MatDialogTitle,
     MatDialogContent,
     MatDialogActions,
-    MatDialogClose,
   ],
 })
 export class OpenCardInfoButtonDialog {
-  readonly dialogRef = inject(MatDialogRef<OpenCardInfoButtonDialog>);
-  readonly data = inject<DialogData>(MAT_DIALOG_DATA);
-  readonly animal = model(this.data.animal);
 
-  onNoClick(): void {
+  readonly dialogRef = inject(MatDialogRef<OpenCardInfoButtonDialog>);
+  readonly data = inject<Exam>(MAT_DIALOG_DATA);
+
+  editedExam: Exam = {
+    cpf: this.data.cpf,
+    data: this.data.data,
+    name: this.data.name,
+    status: this.data.status,
+    type: this.data.type,
+    id: this.data.id
+  }
+
+  constructor(private examService: ExamService) { }
+
+  onCloseClick(): void {
     this.dialogRef.close();
   }
+
+  onUpdateClick(): void {
+    this.examService.updateExam(this.editedExam).subscribe({
+      next: (res) => {
+        console.log('Exame atualizado com sucesso! ', res);
+        this.dialogRef.close(this.editedExam);
+      },
+      error: (err) => {
+        console.error('Erro ao atualizar: ', err);
+        alert('Erro ao atualizar o exame.');
+      }
+    });
+  }
+
+
 }

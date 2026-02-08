@@ -16,4 +16,18 @@ export class ExamService {
     return this.http.get<Exam[]>(this.apiUrl);
   }
 
+  updateExam(exam: Exam): Observable<Exam> {
+    const url = `${this.apiUrl}?id=${exam.id}`;
+    return this.http.put<Exam>(url, exam);
+  }
+
+  deleteExam(id: number): Observable<void>{
+    const url = `${this.apiUrl}/${id}`;
+    return this.http.delete<void>(url);
+  }
+
+  createExam(exam: Exam): Observable<Exam>{
+    return this.http.post<Exam>(this.apiUrl, exam);
+  }
+
 }

@@ -8,7 +8,7 @@
                 <mat-card-subtitle>{{item.status}}</mat-card-subtitle>
             </mat-card-header>
             <div class="card-actions">
-                <button matButton (click)="openInfoExamDialog()">Abrir</button>
+                <button matButton (click)="openInfoExamDialog(item)">Abrir</button>
                 <button matButton (click)="openDeleteDialog('0ms', '0ms')">Deletar</button>
             </div>
         </div>

@@ -3,12 +3,18 @@ package com.gerenciadorexames.infra.entitys;
 import com.gerenciadorexames.infra.entitys.enums.ExamStatus;
 import com.gerenciadorexames.infra.entitys.enums.ExamType;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 
 @Data
 @Entity
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "exams")
 public class Exam {
 

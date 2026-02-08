@@ -7,8 +7,8 @@ export class Exam {
     cpf: string;
     data: string;
     name: string;
-    status: ExamStatus;
-    type: ExamType;
+    status?: ExamStatus;
+    type?: ExamType;
 
     constructor(cpf: string, data: string, name: string, status: ExamStatus, type: ExamType, id?: number) {
         this.id = id;
@@ -18,4 +18,5 @@ export class Exam {
         this.status = status;
         this.type = type;
     }
+
 }

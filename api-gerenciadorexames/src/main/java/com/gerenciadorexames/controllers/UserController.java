@@ -14,8 +14,8 @@ public class UserController {
 
     private final UserService userService;
 
-    @GetMapping("/search")
-    public ResponseEntity<User> findUserByEmail (@RequestParam String email){
+    @GetMapping("/{email}")
+    public ResponseEntity<User> findUserByEmail (@PathVariable String email){
         return ResponseEntity.ok(userService.findUserByEmail(email));
     }
 }

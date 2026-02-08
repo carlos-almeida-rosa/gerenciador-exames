@@ -5,29 +5,29 @@
     <div class="corpo-dialog">
         <div class="corpo-dialog-linha">
             <mat-form-field class="corpo-input">
-                <mat-label>Nome do paciente</mat-label>
-                <input matInput [(ngModel)]="animal" />
+                <mat-label>Nome</mat-label>
+                <input matInput [(ngModel)]="newExam.name" />
             </mat-form-field>
             <mat-form-field class="corpo-input">
-                <mat-label>CPF do paciente</mat-label>
-                <input matInput [(ngModel)]="animal" />
+                <mat-label>CPF</mat-label>
+                <input matInput [(ngModel)]="newExam.cpf" />
             </mat-form-field>
             <mat-form-field class="corpo-input">
-                <mat-label>Data do Exame</mat-label>
-                <input matInput [(ngModel)]="animal" />
+                <mat-label>Data</mat-label>
+                <input matInput [(ngModel)]="newExam.data" placeholder="Ex: 2026-02-09" />
             </mat-form-field>
             <mat-form-field class="corpo-input">
-                <mat-label>Tipo do Exame</mat-label>
-                <input matInput [(ngModel)]="animal" />
+                <mat-label>Tipo</mat-label>
+                <input matInput [(ngModel)]="newExam.type" />
             </mat-form-field>
             <mat-form-field class="corpo-input">
                 <mat-label>Status</mat-label>
-                <input matInput [(ngModel)]="animal" />
+                <input matInput [(ngModel)]="newExam.status" />
             </mat-form-field>
         </div>
     </div>
 </mat-dialog-content>
 <mat-dialog-actions>
-    <button matButton (click)="onNoClick()">Fechar</button>
-    <button matButton [mat-dialog-close]="animal()" cdkFocusInitial>Cadastrar</button>
+    <button matButton (click)="onCloseClick()">Fechar</button>
+    <button mat-raised-button color="primary" (click)="onCreateClick()">Cadastrar</button>
 </mat-dialog-actions>

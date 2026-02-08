@@ -4,10 +4,8 @@ import com.gerenciadorexames.infra.entitys.Exam;
 import com.gerenciadorexames.infra.repository.ExamRepository;
 import com.gerenciadorexames.services.ExamService;
 import lombok.AllArgsConstructor;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -19,8 +17,32 @@ public class ExamController {
 
     private final ExamService examService;
 
-    @GetMapping
-    public List<Exam> list(){
-        return examService.list();
+    @PostMapping
+    public ResponseEntity<Void> insertUser(@RequestBody Exam exam){
+      examService.insertExam(exam);
+      return ResponseEntity.ok().build();
     }
+
+    @GetMapping
+    public ResponseEntity<List<Exam>> list(){
+        return ResponseEntity.ok(examService.list());
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Exam> listById(@PathVariable Long id){
+      return ResponseEntity.ok(examService.listById(id));
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteById(@PathVariable Long id){
+      examService.deleteById(id);
+      return ResponseEntity.ok().build();
+    }
+
+    @PutMapping
+    public ResponseEntity<Void> updateExam(@RequestParam Long id, @RequestBody Exam exam){
+      examService.updateExamById(id, exam);
+      return ResponseEntity.ok().build();
+    }
+
 }

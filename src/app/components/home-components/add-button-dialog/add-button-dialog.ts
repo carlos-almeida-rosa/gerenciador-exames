@@ -11,6 +11,8 @@ import {
 } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { ExamService } from '../../../services/exam';
+import { Exam } from '../../../models/exam';
 
 export interface DialogData {
   animal: string;
@@ -34,11 +36,31 @@ export interface DialogData {
 })
 export class AddButtonDialog {
 
-  readonly dialogRef = inject(MatDialogRef<AddButtonDialog>);
-  readonly data = inject<DialogData>(MAT_DIALOG_DATA);
-  readonly animal = model(this.data.animal);
+  constructor(private examService: ExamService) { }
 
-  onNoClick(): void {
+  readonly dialogRef = inject(MatDialogRef<AddButtonDialog>);
+  
+  newExam: Exam = {
+    name : '',
+    cpf : '',
+    data : '',
+    type : '' as any,
+    status : '' as any,
+  }
+
+  onCloseClick(): void {
     this.dialogRef.close();
+  }
+
+  onCreateClick(): void{
+    this.examService.createExam(this.newExam).subscribe({
+      next: (res) => {
+        console.log('Exame criado com sucesso! ', res);
+        this.dialogRef.close(res);
+      },
+      error: (err) => {
+        console.error('Erro ao criar exame: ', err);
+      }
+    })
   }
 }

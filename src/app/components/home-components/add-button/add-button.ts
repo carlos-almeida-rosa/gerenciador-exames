@@ -22,9 +22,10 @@ export class AddButton {
   readonly animal = signal('');
   readonly name = model('');
   readonly dialog = inject(MatDialog);
-  openDialog(): void {
+
+  openAddExamDialog(): void {
     const dialogRef = this.dialog.open(AddButtonDialog, {
-      data: { name: this.name(), animal: this.animal() },
+      width: '600px'
     });
 
     dialogRef.afterClosed().subscribe(result => {

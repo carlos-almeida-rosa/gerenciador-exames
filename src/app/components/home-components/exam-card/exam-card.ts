@@ -48,9 +48,15 @@ export class ExamCard implements OnInit {
     });
   }
 
-  openInfoExamDialog(): void {
+  openInfoExamDialog(exam: Exam): void {
     const dialogRef = this.dialog.open(OpenCardInfoButtonDialog, {
-      data: { name: this.name(), animal: this.animal() },
+      data: { 
+        name: exam.name, 
+        cpf: exam.cpf, 
+        data: exam.data, 
+        type: exam.type,
+        status: exam.status, 
+        id: exam.id },
     });
 
     dialogRef.afterClosed().subscribe(result => {
