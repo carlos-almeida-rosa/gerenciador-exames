@@ -1,0 +1,34 @@
+package com.gerenciadorexames.infra.entitys;
+
+import com.gerenciadorexames.infra.entitys.enums.ExamStatus;
+import com.gerenciadorexames.infra.entitys.enums.ExamType;
+import jakarta.persistence.*;
+import lombok.Data;
+
+import java.time.LocalDate;
+
+@Data
+@Entity
+@Table(name = "exams")
+public class Exam {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+
+    @Column(length = 200, nullable = false)
+    private String name;
+
+    @Column(length = 15, nullable = false)
+    private String cpf;
+
+    @Column(length = 15, nullable = false)
+    private LocalDate data;
+
+    @Column(length = 40, nullable = false)
+    private String type;
+
+    @Column(length = 40, nullable = false)
+    private String status;
+
+}

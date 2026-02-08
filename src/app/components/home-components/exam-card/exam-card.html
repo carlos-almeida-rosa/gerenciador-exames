@@ -1,10 +1,10 @@
 <div class="cards-container">
-    @for (item of listaDeExames; track item.id) {
+    @for (item of listaDeExames(); track item.id) {
     <mat-card class="exam-card" appearance="outlined">
         <div class="header-wrapper">
             <mat-card-header>
                 <div mat-card-avatar class="example-header-image"></div>
-                <mat-card-title>{{item.nomePaciente}}</mat-card-title>
+                <mat-card-title>{{item.name}}</mat-card-title>
                 <mat-card-subtitle>{{item.status}}</mat-card-subtitle>
             </mat-card-header>
             <div class="card-actions">
