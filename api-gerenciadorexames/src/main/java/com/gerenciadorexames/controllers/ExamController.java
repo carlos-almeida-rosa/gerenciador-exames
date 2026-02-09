@@ -18,9 +18,9 @@ public class ExamController {
     private final ExamService examService;
 
     @PostMapping
-    public ResponseEntity<Void> insertUser(@RequestBody Exam exam){
-      examService.insertExam(exam);
-      return ResponseEntity.ok().build();
+    public ResponseEntity<Exam> insertExam(@RequestBody Exam exam){
+      Exam newExam = examService.insertExam(exam);
+      return ResponseEntity.ok(newExam);
     }
 
     @GetMapping

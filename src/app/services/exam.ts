@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, signal } from '@angular/core';
 import { Exam } from '../models/exam';
 import { Observable } from 'rxjs';
 
@@ -11,9 +11,16 @@ export class ExamService {
   private apiUrl = 'http://localhost:8080/api/exams';
 
   constructor(private http:HttpClient){}
+
+  examList = signal<Exam[]>([]);
   
-  getExams(): Observable<Exam[]>{
-    return this.http.get<Exam[]>(this.apiUrl);
+  loadExams(): void{
+    this.http.get<Exam[]>(this.apiUrl).subscribe({
+      next: (res) => {
+        this.examList.set(res);
+      },
+      error: (err) => console.error('Erro ao buscar: ', err)
+    });
   }
 
   updateExam(exam: Exam): Observable<Exam> {
@@ -28,6 +35,14 @@ export class ExamService {
 
   createExam(exam: Exam): Observable<Exam>{
     return this.http.post<Exam>(this.apiUrl, exam);
+  }
+
+  updateSignal(updatedExam: Exam) {
+    this.examList.update(currentList => 
+      currentList.map(item => 
+        item.id === updatedExam.id ? updatedExam : item
+      )
+    );
   }
 
 }

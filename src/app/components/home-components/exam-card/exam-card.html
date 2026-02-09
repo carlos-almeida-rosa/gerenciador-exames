@@ -1,5 +1,5 @@
 <div class="cards-container">
-    @for (item of listaDeExames(); track item.id) {
+    @for (item of examService.examList(); track item.id) {
     <mat-card class="exam-card" appearance="outlined">
         <div class="header-wrapper">
             <mat-card-header>

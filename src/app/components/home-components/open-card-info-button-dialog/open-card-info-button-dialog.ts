@@ -53,13 +53,9 @@ export class OpenCardInfoButtonDialog {
   onUpdateClick(): void {
     this.examService.updateExam(this.editedExam).subscribe({
       next: (res) => {
-        console.log('Exame atualizado com sucesso! ', res);
-        this.dialogRef.close(this.editedExam);
+        this.dialogRef.close(res || this.editedExam);
       },
-      error: (err) => {
-        console.error('Erro ao atualizar: ', err);
-        alert('Erro ao atualizar o exame.');
-      }
+      error: (err) => console.error(err)
     });
   }
 

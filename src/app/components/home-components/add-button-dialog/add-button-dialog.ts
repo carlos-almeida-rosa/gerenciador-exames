@@ -39,28 +39,26 @@ export class AddButtonDialog {
   constructor(private examService: ExamService) { }
 
   readonly dialogRef = inject(MatDialogRef<AddButtonDialog>);
-  
+
   newExam: Exam = {
-    name : '',
-    cpf : '',
-    data : '',
-    type : '' as any,
-    status : '' as any,
+    name: '',
+    cpf: '',
+    data: '',
+    type: '' as any,
+    status: '' as any,
   }
 
   onCloseClick(): void {
     this.dialogRef.close();
   }
 
-  onCreateClick(): void{
+  onCreateClick(): void {
     this.examService.createExam(this.newExam).subscribe({
       next: (res) => {
-        console.log('Exame criado com sucesso! ', res);
+        console.log('Backend respondeu:', res); // Debug 1
         this.dialogRef.close(res);
       },
-      error: (err) => {
-        console.error('Erro ao criar exame: ', err);
-      }
-    })
+      error: (err) => console.error('Erro:', err)
+    });
   }
 }

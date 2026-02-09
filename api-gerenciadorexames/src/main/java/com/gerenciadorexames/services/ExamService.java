@@ -19,8 +19,8 @@ public class ExamService {
         return examRepository.findAll();
     }
 
-    public void insertExam(Exam exam){
-      examRepository.saveAndFlush(exam);
+    public Exam insertExam(Exam exam){
+      return examRepository.saveAndFlush(exam);
     }
 
     public Exam listById(Long id){

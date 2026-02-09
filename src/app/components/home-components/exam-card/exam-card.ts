@@ -22,22 +22,10 @@ import { CommonModule } from '@angular/common';
 export class ExamCard implements OnInit {
 
   readonly dialog = inject(MatDialog);
-  readonly animal = signal('');
-  readonly name = model('');
-  listaDeExames = signal<Exam[]>([]);
+  constructor(public examService: ExamService) { }
 
-  constructor(private examService: ExamService) { }
-  
   ngOnInit(): void {
-    this.examService.getExams().subscribe(
-      (res) => {
-        this.listaDeExames.set(res);
-        console.log(res);
-      },
-      (error) => {
-        console.log('Erro ao buscar exames: ', error);
-      }
-    );
+    this.examService.loadExams();
   }
 
   openDeleteDialog(enterAnimationDuration: string, exitAnimationDuration: string): void {
@@ -50,19 +38,14 @@ export class ExamCard implements OnInit {
 
   openInfoExamDialog(exam: Exam): void {
     const dialogRef = this.dialog.open(OpenCardInfoButtonDialog, {
-      data: { 
-        name: exam.name, 
-        cpf: exam.cpf, 
-        data: exam.data, 
-        type: exam.type,
-        status: exam.status, 
-        id: exam.id },
+      data: { ...exam },
     });
 
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-      if (result !== undefined) {
-        this.animal.set(result);
+    dialogRef.afterClosed().subscribe((result: Exam | undefined) => {
+      if (result) {
+        console.log('Recebi o exame editado:', result);
+
+        this.examService.updateSignal(result);
       }
     });
   }

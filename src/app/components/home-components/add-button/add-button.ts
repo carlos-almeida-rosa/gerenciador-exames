@@ -9,6 +9,8 @@ import {
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { AddButtonDialog } from '../add-button-dialog/add-button-dialog';
+import { ExamService } from '../../../services/exam';
+import { Exam } from '../../../models/exam';
 
 @Component({
   selector: 'app-add-button',
@@ -19,19 +21,20 @@ import { AddButtonDialog } from '../add-button-dialog/add-button-dialog';
 })
 
 export class AddButton {
-  readonly animal = signal('');
-  readonly name = model('');
   readonly dialog = inject(MatDialog);
+  private examService = inject(ExamService);
 
   openAddExamDialog(): void {
     const dialogRef = this.dialog.open(AddButtonDialog, {
       width: '600px'
     });
 
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-      if (result !== undefined) {
-        this.animal.set(result);
+    dialogRef.afterClosed().subscribe((result: Exam | undefined) => {
+      if (result) {
+        console.log('AddButton recebeu:', result);
+        this.examService.examList.update(listaAtual => [...listaAtual, result]);
+      } else {
+        console.log('AddButton recebeu undefined (Dialog fechou sem dados)');
       }
     });
   }
