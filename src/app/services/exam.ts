@@ -45,4 +45,10 @@ export class ExamService {
     );
   }
 
+  deleteFromSignal(id: number) {
+  this.examList.update(currentList => 
+    currentList.filter(item => item.id !== id)
+  );
+}
+
 }

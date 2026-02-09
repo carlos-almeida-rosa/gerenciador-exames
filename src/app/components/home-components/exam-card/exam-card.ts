@@ -22,17 +22,32 @@ import { CommonModule } from '@angular/common';
 export class ExamCard implements OnInit {
 
   readonly dialog = inject(MatDialog);
+
   constructor(public examService: ExamService) { }
 
   ngOnInit(): void {
     this.examService.loadExams();
   }
 
-  openDeleteDialog(enterAnimationDuration: string, exitAnimationDuration: string): void {
-    this.dialog.open(DeleteCardButtonDialog, {
+  openDeleteDialog(exam: Exam): void {
+    const dialogRef = this.dialog.open(DeleteCardButtonDialog, {
       width: '250px',
-      enterAnimationDuration,
-      exitAnimationDuration,
+      enterAnimationDuration: '0ms',
+      exitAnimationDuration: '0ms',
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === true) {
+
+        this.examService.deleteExam(exam.id!).subscribe({
+          next: () => {
+            console.log('Deletado do banco com sucesso');
+
+            this.examService.deleteFromSignal(exam.id!);
+          },
+          error: (err) => console.error('Erro ao deletar:', err)
+        });
+      }
     });
   }
 
@@ -44,11 +59,8 @@ export class ExamCard implements OnInit {
     dialogRef.afterClosed().subscribe((result: Exam | undefined) => {
       if (result) {
         console.log('Recebi o exame editado:', result);
-
         this.examService.updateSignal(result);
       }
     });
   }
 }
-
-

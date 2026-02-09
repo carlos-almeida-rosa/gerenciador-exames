@@ -14,10 +14,10 @@ import { MatInputModule } from '@angular/material/input';
 import { ExamService } from '../../../services/exam';
 import { Exam } from '../../../models/exam';
 
-export interface DialogData {
-  animal: string;
-  name: string;
-}
+// export interface DialogData {
+//   animal: string;
+//   name: string;
+// }
 
 @Component({
   selector: 'app-add-button-dialog',

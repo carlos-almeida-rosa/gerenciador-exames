@@ -3,6 +3,7 @@
   Gostaria de deletar este card?
 </mat-dialog-content>
 <mat-dialog-actions>
-  <button matButton mat-dialog-close>Não</button>
-  <button matButton mat-dialog-close cdkFocusInitial>Sim</button>
+  <button mat-button [mat-dialog-close]="false">Não</button>
+  
+  <button mat-button [mat-dialog-close]="true" cdkFocusInitial color="warn">Sim</button>
 </mat-dialog-actions>
