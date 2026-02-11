@@ -5,11 +5,14 @@
     <input
       matInput
       placeholder="pat@example.com"
-      [formControl]="email"
+      [formControl]="emailControl"
       (blur)="updateErrorMessage()"
       required
+      id="email"
+      name="email"
+      [(ngModel)]="emailValue"
     />
-    @if (email.invalid) {
+    @if (emailControl.invalid) {
       <mat-error>{{errorMessage()}}</mat-error>
     }
     <mat-icon matSuffix>mark_as_unread</mat-icon>

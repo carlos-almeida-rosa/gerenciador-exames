@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, model, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -14,20 +14,20 @@ import {MatIconModule} from '@angular/material/icon';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class EmailInput {
-  readonly email = new FormControl('', [Validators.required, Validators.email]);
-
+  readonly emailControl = new FormControl('', [Validators.required, Validators.email]);
   errorMessage = signal('');
+  emailValue=model<string>('');
 
   constructor() {
-    merge(this.email.statusChanges, this.email.valueChanges)
+    merge(this.emailControl.statusChanges, this.emailControl.valueChanges)
       .pipe(takeUntilDestroyed())
       .subscribe(() => this.updateErrorMessage());
   }
 
   updateErrorMessage() {
-    if (this.email.hasError('required')) {
+    if (this.emailControl.hasError('required')) {
       this.errorMessage.set('You must enter a value');
-    } else if (this.email.hasError('email')) {
+    } else if (this.emailControl.hasError('email')) {
       this.errorMessage.set('Not a valid email');
     } else {
       this.errorMessage.set('');

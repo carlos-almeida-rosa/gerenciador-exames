@@ -3,9 +3,9 @@
     <mat-card-title>Login</mat-card-title>
   </mat-card-header>
   <mat-card-content>
-    <app-email-input />
-    <app-password-input />
+    <app-email-input [(emailValue)] = "loginEmail" />
+    <app-password-input [(passwordValue)] = "loginPassword" />
     <button matButton>Recuperar Senha</button>
-    <button matButton>Entrar</button>
+    <button matButton (click)="onSubmit()">Entrar</button>
   </mat-card-content>
 </mat-card>
