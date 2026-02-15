@@ -1,6 +1,6 @@
 package com.gerenciadorexames.services;
 
-import com.gerenciadorexames.infra.entitys.Exam;
+import com.gerenciadorexames.infra.entities.Exam;
 import com.gerenciadorexames.infra.repository.ExamRepository;
 import org.springframework.stereotype.Service;
 

@@ -1,7 +1,6 @@
 package com.gerenciadorexames.controllers;
 
-import com.gerenciadorexames.infra.entitys.Exam;
-import com.gerenciadorexames.infra.repository.ExamRepository;
+import com.gerenciadorexames.infra.entities.Exam;
 import com.gerenciadorexames.services.ExamService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;

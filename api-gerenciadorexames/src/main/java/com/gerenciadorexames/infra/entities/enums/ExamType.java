@@ -1,4 +1,4 @@
-package com.gerenciadorexames.infra.entitys.enums;
+package com.gerenciadorexames.infra.entities.enums;
 
 public enum ExamType {
     SANGUE("Sangue"),

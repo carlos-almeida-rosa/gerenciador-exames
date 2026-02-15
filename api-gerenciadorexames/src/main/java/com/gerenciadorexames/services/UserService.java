@@ -1,6 +1,6 @@
 package com.gerenciadorexames.services;
 
-import com.gerenciadorexames.infra.entitys.User;
+import com.gerenciadorexames.infra.entities.User;
 import com.gerenciadorexames.infra.repository.UserRepository;
 import org.springframework.stereotype.Service;
 

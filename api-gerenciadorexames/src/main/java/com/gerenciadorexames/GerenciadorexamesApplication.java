@@ -1,15 +1,16 @@
 package com.gerenciadorexames;
 
-import com.gerenciadorexames.infra.entitys.Exam;
-import com.gerenciadorexames.infra.entitys.User;
-import com.gerenciadorexames.infra.entitys.enums.ExamStatus;
-import com.gerenciadorexames.infra.entitys.enums.ExamType;
+import com.gerenciadorexames.infra.entities.Exam;
+import com.gerenciadorexames.infra.entities.User;
+import com.gerenciadorexames.infra.entities.enums.ExamStatus;
+import com.gerenciadorexames.infra.entities.enums.ExamType;
 import com.gerenciadorexames.infra.repository.ExamRepository;
 import com.gerenciadorexames.infra.repository.UserRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.time.LocalDate;
 
@@ -21,7 +22,7 @@ public class GerenciadorexamesApplication {
 	}
 
 	@Bean
-	CommandLineRunner initDatabase(ExamRepository examRepository, UserRepository userRepository){
+	CommandLineRunner initDatabase(ExamRepository examRepository, UserRepository userRepository, PasswordEncoder passwordEncoder){
 		return args -> {
 			examRepository.deleteAll();
 			userRepository.deleteAll();
@@ -35,12 +36,11 @@ public class GerenciadorexamesApplication {
         .build();
       examRepository.save(e);
 
-      User u = User.builder()
-        .name("Leandro Vilela")
-        .email("leandro@gmail.com")
-        .password("123456")
-        .build();
-      userRepository.save(u);
+      User newUser = new User();
+      newUser.setPassword(passwordEncoder.encode("123456"));
+      newUser.setEmail("leandro@gmail.com");
+      newUser.setName("Leandro Vilela");
+      userRepository.save(newUser);
 
 		};
 	}

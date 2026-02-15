@@ -1,7 +1,6 @@
 package com.gerenciadorexames.controllers;
 
-import com.gerenciadorexames.infra.entitys.User;
-import com.gerenciadorexames.infra.repository.UserRepository;
+import com.gerenciadorexames.infra.entities.User;
 import com.gerenciadorexames.services.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
