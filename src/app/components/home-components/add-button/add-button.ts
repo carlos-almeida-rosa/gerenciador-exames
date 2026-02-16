@@ -31,10 +31,7 @@ export class AddButton {
 
     dialogRef.afterClosed().subscribe((result: Exam | undefined) => {
       if (result) {
-        console.log('AddButton recebeu:', result);
         this.examService.examList.update(listaAtual => [...listaAtual, result]);
-      } else {
-        console.log('AddButton recebeu undefined (Dialog fechou sem dados)');
       }
     });
   }

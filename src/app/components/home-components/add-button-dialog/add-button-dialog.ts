@@ -55,7 +55,6 @@ export class AddButtonDialog {
   onCreateClick(): void {
     this.examService.createExam(this.newExam).subscribe({
       next: (res) => {
-        console.log('Backend respondeu:', res); // Debug 1
         this.dialogRef.close(res);
       },
       error: (err) => console.error('Erro:', err)

@@ -41,8 +41,6 @@ export class ExamCard implements OnInit {
 
         this.examService.deleteExam(exam.id!).subscribe({
           next: () => {
-            console.log('Deletado do banco com sucesso');
-
             this.examService.deleteFromSignal(exam.id!);
           },
           error: (err) => console.error('Erro ao deletar:', err)
@@ -58,7 +56,6 @@ export class ExamCard implements OnInit {
 
     dialogRef.afterClosed().subscribe((result: Exam | undefined) => {
       if (result) {
-        console.log('Recebi o exame editado:', result);
         this.examService.updateSignal(result);
       }
     });
