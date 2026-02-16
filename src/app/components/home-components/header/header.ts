@@ -7,9 +7,7 @@ import {
   MatDialog,
 } from '@angular/material/dialog';
 import { ChangePasswordDialog } from '../change-password-dialog/change-password-dialog';
-import { Router, RouterLink } from "@angular/router";
-import { HttpClient } from '@angular/common/http';
-import { finalize } from 'rxjs';
+import { RouterLink } from "@angular/router";
 import { Auth } from '../../../services/auth';
 
 @Component({
@@ -20,31 +18,24 @@ import { Auth } from '../../../services/auth';
 })
 export class Header {
   readonly dialog = inject(MatDialog);
-  readonly animal = signal('');
-  readonly name = model('');
-  private http = inject(HttpClient);
-  private auth = inject(Auth)
-  private router = inject(Router);
+  readonly password = signal('');
+  readonly confirmPassword = model('');
+  private authService = inject(Auth)
 
   openChangePasswordDialog(): void {
     const dialogRef = this.dialog.open(ChangePasswordDialog, {
-      data: { name: this.name(), animal: this.animal() },
+      data: { password: this.password(), confirmPassword: this.confirmPassword() },
     });
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
-      if (result !== undefined) {
-        this.animal.set(result);
-      }
+      // if (result !== undefined) {
+      //   this.password.set(result);
+      // }
     });
   }
 
   logout(): void {
-    this.http.post('logout', {}).pipe(
-      finalize(()=>{
-        this.auth.authenticated = false;
-        this.router.navigateByUrl('/login');
-      })
-    ).subscribe();
+    this.authService.logout();
   }
 }
