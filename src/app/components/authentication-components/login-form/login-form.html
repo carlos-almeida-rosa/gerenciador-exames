@@ -3,9 +3,12 @@
     <mat-card-title>Login</mat-card-title>
   </mat-card-header>
   <mat-card-content>
-    <app-email-input [(emailValue)] = "loginEmail" />
-    <app-password-input [(passwordValue)] = "loginPassword" />
-    <button matButton>Recuperar Senha</button>
-    <button matButton (click)="login()">Entrar</button>
+    <app-email-input [(emailValue)]="loginEmail" />
+    <app-password-input [(passwordValue)]="loginPassword" />
+    <div class="actions-container">
+      <button matButton (click)="openRestorePasswordDialog()">Recuperar Senha</button>
+      <button matButton (click)="openCreateAccoutDialog()">Criar conta</button>
+      <button mat-flat-button color="primary" (click)="login()">Entrar</button>
+    </div>
   </mat-card-content>
 </mat-card>

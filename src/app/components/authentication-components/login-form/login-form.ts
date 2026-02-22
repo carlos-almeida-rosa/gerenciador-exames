@@ -6,12 +6,16 @@ import { PasswordInput } from '../password-input/password-input';
 import { Router, RouterLink } from "@angular/router";
 import { Auth } from '../../../services/auth';
 import { FormsModule } from "@angular/forms";
+import { ToastrService } from 'ngx-toastr';
+import { RestorePasswordDialog } from '../restore-password-dialog/restore-password-dialog';
+import { MatDialog } from '@angular/material/dialog';
+import { CdkPortalOutlet } from "@angular/cdk/portal";
 
 @Component({
   selector: 'app-login-form',
   templateUrl: './login-form.html',
   styleUrl: './login-form.scss',
-  imports: [MatCardModule, MatButtonModule, EmailInput, PasswordInput, RouterLink, FormsModule],
+  imports: [MatCardModule, MatButtonModule, EmailInput, PasswordInput, RouterLink, FormsModule, CdkPortalOutlet],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LoginForm implements OnInit {
@@ -20,6 +24,8 @@ export class LoginForm implements OnInit {
   loginPassword = signal('');
   private authService = inject(Auth);
   private router = inject(Router);
+  toastr = inject(ToastrService)
+  readonly dialog = inject(MatDialog)
 
   constructor() {
     if (localStorage.getItem('auth-token')) {
@@ -47,11 +53,21 @@ export class LoginForm implements OnInit {
       },
       error: (err) => {
         if (err.status === 403 || err.status === 401) {
-          alert("Email ou senha incorretos!");
+          this.toastr.error('Email ou senha incorretos!');
         } else {
-          alert("Erro no servidor: " + err.message);
+          this.toastr.error('Erro no servidor: ', err.message);
         }
       }
     });
   }
+
+  openRestorePasswordDialog(): void {
+    const dialogRef = this.dialog.open(RestorePasswordDialog);
+  }
+
+  openCreateAccoutDialog(): void {
+    // const dialogRef = this.dialog.open(RestorePasswordDialog);
+    console.log("Implementar dialog de criar conta")
+  }
+
 }

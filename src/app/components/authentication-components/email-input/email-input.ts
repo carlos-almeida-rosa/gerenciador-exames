@@ -26,9 +26,9 @@ export class EmailInput {
 
   updateErrorMessage() {
     if (this.emailControl.hasError('required')) {
-      this.errorMessage.set('You must enter a value');
+      this.errorMessage.set('Digite o email');
     } else if (this.emailControl.hasError('email')) {
-      this.errorMessage.set('Not a valid email');
+      this.errorMessage.set('Email inválido');
     } else {
       this.errorMessage.set('');
     }

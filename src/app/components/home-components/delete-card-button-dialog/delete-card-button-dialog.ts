@@ -9,11 +9,6 @@ import {
   MatDialogTitle,
 } from '@angular/material/dialog';
 
-export interface DialogData {
-  animal: string;
-  name: string;
-}
-
 @Component({
   selector: 'app-delete-card-button-dialog',
 

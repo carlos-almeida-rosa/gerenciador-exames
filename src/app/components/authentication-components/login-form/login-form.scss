@@ -27,3 +27,8 @@ $largura-padrao: 400px;
     box-sizing: border-box;
   }
 }
+
+.actions-container{
+  display: flex;
+  flex-direction: column;
+}

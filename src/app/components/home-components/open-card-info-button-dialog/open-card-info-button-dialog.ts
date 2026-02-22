@@ -12,11 +12,6 @@ import { MatInputModule } from '@angular/material/input';
 import { Exam } from '../../../models/exam';
 import { ExamService } from '../../../services/exam';
 
-export interface DialogData {
-  animal: string;
-  name: string;
-}
-
 @Component({
   selector: 'app-open-card-info-button-dialog',
   templateUrl: './open-card-info-button-dialog.html',
@@ -58,6 +53,4 @@ export class OpenCardInfoButtonDialog {
       error: (err) => console.error(err)
     });
   }
-
-
 }
