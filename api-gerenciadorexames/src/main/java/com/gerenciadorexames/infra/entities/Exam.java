@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
+import java.util.UUID;
 
 @Data
 @Entity
@@ -17,22 +18,18 @@ import java.time.LocalDate;
 public class Exam {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private UUID id;
 
     @Column(length = 200, nullable = false)
     private String name;
 
-    @Column(length = 15, nullable = false)
-    private String cpf;
+    @Column(length = 200, nullable = false)
+    private String measureUnity;
 
-    @Column(length = 15, nullable = false)
-    private LocalDate data;
+    @Column(nullable = false)
+    private Double minReference;
 
-    @Column(length = 40, nullable = false)
-    private String type;
-
-    @Column(length = 40, nullable = false)
-    private String status;
-
+    @Column(nullable = false)
+    private Double maxReference;
 }

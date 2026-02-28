@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/exams")
@@ -28,18 +29,18 @@ public class ExamController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Exam> listById(@PathVariable Long id){
+    public ResponseEntity<Exam> listById(@PathVariable UUID id){
       return ResponseEntity.ok(examService.listById(id));
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteById(@PathVariable Long id){
+    public ResponseEntity<Void> deleteById(@PathVariable UUID id){
       examService.deleteById(id);
       return ResponseEntity.ok().build();
     }
 
     @PutMapping
-    public ResponseEntity<Void> updateExam(@RequestParam Long id, @RequestBody Exam exam){
+    public ResponseEntity<Void> updateExam(@RequestParam UUID id, @RequestBody Exam exam){
       examService.updateExamById(id, exam);
       return ResponseEntity.ok().build();
     }

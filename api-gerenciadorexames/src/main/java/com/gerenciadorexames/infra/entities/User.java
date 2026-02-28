@@ -1,5 +1,6 @@
 package com.gerenciadorexames.infra.entities;
 
+import com.gerenciadorexames.infra.entities.enums.Role;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -28,4 +29,8 @@ public class User {
 
     @Column(length = 200, nullable = false)
     private String password;
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private Role role;
 }
