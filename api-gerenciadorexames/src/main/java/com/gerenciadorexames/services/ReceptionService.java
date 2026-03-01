@@ -3,8 +3,9 @@ package com.gerenciadorexames.services;
 import com.gerenciadorexames.infra.entities.Reception;
 import com.gerenciadorexames.infra.repository.ReceptionRepository;
 import com.gerenciadorexames.services.interfaces.CRUDService;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-
+import org.springframework.data.domain.Page;
 import java.util.List;
 import java.util.UUID;
 
@@ -21,6 +22,10 @@ public class ReceptionService implements CRUDService<Reception, UUID> {
     @Override
     public List<Reception> list(){
       return receptionRepository.findAll();
+    }
+
+    public Page<Reception> listPage(Pageable pageable){
+      return receptionRepository.findAll(pageable);
     }
 
     @Override

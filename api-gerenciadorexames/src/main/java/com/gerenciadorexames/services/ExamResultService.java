@@ -3,6 +3,8 @@ package com.gerenciadorexames.services;
 import com.gerenciadorexames.infra.entities.ExamResult;
 import com.gerenciadorexames.infra.repository.ExamResultRepository;
 import com.gerenciadorexames.services.interfaces.CRUDService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -20,6 +22,10 @@ public class ExamResultService implements CRUDService<ExamResult, UUID> {
     @Override
     public List<ExamResult> list() {
       return examResultRepository.findAll();
+    }
+
+    public Page<ExamResult> listPage(Pageable pageable){
+      return examResultRepository.findAll(pageable);
     }
 
     @Override

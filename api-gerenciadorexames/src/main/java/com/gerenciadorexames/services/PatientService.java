@@ -3,9 +3,9 @@ package com.gerenciadorexames.services;
 import com.gerenciadorexames.infra.entities.Patient;
 import com.gerenciadorexames.infra.repository.PatientRepository;
 import com.gerenciadorexames.services.interfaces.CRUDService;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
-
-import java.time.LocalDate;
+import org.springframework.data.domain.Pageable;
 import java.util.List;
 import java.util.UUID;
 
@@ -21,6 +21,10 @@ public class PatientService implements CRUDService<Patient, UUID> {
     @Override
     public List<Patient> list(){
       return patientRepository.findAll();
+    }
+
+    public Page<Patient> listPage(Pageable pageable){
+      return patientRepository.findAll(pageable);
     }
 
     @Override

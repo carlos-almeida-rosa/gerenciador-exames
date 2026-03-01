@@ -3,6 +3,7 @@ package com.gerenciadorexames.controllers;
 import com.gerenciadorexames.infra.entities.Exam;
 import com.gerenciadorexames.services.ExamService;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,12 +21,12 @@ public class ExamController {
     @PostMapping
     public ResponseEntity<Exam> insertExam(@RequestBody Exam exam){
       Exam newExam = examService.insert(exam);
-      return ResponseEntity.ok(newExam);
+      return ResponseEntity.status(HttpStatus.CREATED).body(newExam);
     }
 
     @GetMapping
     public ResponseEntity<List<Exam>> list(){
-        return ResponseEntity.ok(examService.list());
+      return ResponseEntity.ok(examService.list());
     }
 
     @GetMapping("/{id}")
@@ -36,13 +37,13 @@ public class ExamController {
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteById(@PathVariable UUID id){
       examService.deleteById(id);
-      return ResponseEntity.ok().build();
+      return ResponseEntity.noContent().build();
     }
 
-    @PutMapping
-    public ResponseEntity<Void> updateExam(@RequestParam UUID id, @RequestBody Exam exam){
+    @PutMapping("/{id}")
+    public ResponseEntity<Void> updateExam(@PathVariable UUID id, @RequestBody Exam exam){
       examService.updateById(id, exam);
-      return ResponseEntity.ok().build();
+      return ResponseEntity.noContent().build();
     }
 
 }
