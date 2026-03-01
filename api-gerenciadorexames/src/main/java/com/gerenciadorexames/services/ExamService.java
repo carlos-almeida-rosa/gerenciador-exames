@@ -2,13 +2,13 @@ package com.gerenciadorexames.services;
 
 import com.gerenciadorexames.infra.entities.Exam;
 import com.gerenciadorexames.infra.repository.ExamRepository;
+import com.gerenciadorexames.services.interfaces.CRUDService;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 import java.util.UUID;
 
 @Service
-public class ExamService {
+public class ExamService implements CRUDService<Exam, UUID> {
 
     private final ExamRepository examRepository;
 
@@ -16,34 +16,38 @@ public class ExamService {
         this.examRepository = examRepository;
     }
 
+    @Override
     public List<Exam> list(){
         return examRepository.findAll();
     }
 
-    public Exam insertExam(Exam exam){
-      return examRepository.saveAndFlush(exam);
+    @Override
+    public Exam insert(Exam entity){
+      return examRepository.saveAndFlush(entity);
     }
 
+    @Override
     public Exam listById(UUID id){
       return examRepository.findById(id).orElseThrow(
         () -> new RuntimeException("Exame não encontrado!")
       );
     }
 
+    @Override
     public void deleteById(UUID id){
-        examRepository.deleteById(id);
+      examRepository.deleteById(id);
     }
 
-    public void updateExamById(UUID id, Exam exam){
+    @Override
+    public void updateById(UUID id, Exam entity) {
       Exam examEntity = listById(id);
       Exam examUpdated = Exam.builder()
-        .id(exam.getId() != null ? exam.getId() : examEntity.getId())
-        .name(exam.getName() != null ? exam.getName() : examEntity.getName())
-        .measureUnity(exam.getMeasureUnity() != null ? exam.getMeasureUnity() : examEntity.getMeasureUnity())
-        .minReference(exam.getMinReference() != null ? exam.getMinReference() : examEntity.getMinReference())
-        .maxReference(exam.getMaxReference() != null ? exam.getMaxReference() : examEntity.getMaxReference())
+        .id(entity.getId() != null ? entity.getId() : examEntity.getId())
+        .name(entity.getName() != null ? entity.getName() : examEntity.getName())
+        .measureUnity(entity.getMeasureUnity() != null ? entity.getMeasureUnity() : examEntity.getMeasureUnity())
+        .minReference(entity.getMinReference() != null ? entity.getMinReference() : examEntity.getMinReference())
+        .maxReference(entity.getMaxReference() != null ? entity.getMaxReference() : examEntity.getMaxReference())
         .build();
       examRepository.saveAndFlush(examUpdated);
-
     }
 }

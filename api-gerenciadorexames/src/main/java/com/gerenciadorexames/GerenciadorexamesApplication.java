@@ -25,7 +25,7 @@ public class GerenciadorexamesApplication {
     PatientRepository patientRepository,
     ExamRepository examRepository,
     ReceptionRepository receptionRepository,
-    ResultRepository resultRepository,
+    ExamResultRepository resultRepository,
     PasswordEncoder passwordEncoder
   ){
 		return args -> {

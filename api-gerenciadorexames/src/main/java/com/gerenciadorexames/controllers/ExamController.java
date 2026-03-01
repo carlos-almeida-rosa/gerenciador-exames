@@ -19,7 +19,7 @@ public class ExamController {
 
     @PostMapping
     public ResponseEntity<Exam> insertExam(@RequestBody Exam exam){
-      Exam newExam = examService.insertExam(exam);
+      Exam newExam = examService.insert(exam);
       return ResponseEntity.ok(newExam);
     }
 
@@ -41,7 +41,7 @@ public class ExamController {
 
     @PutMapping
     public ResponseEntity<Void> updateExam(@RequestParam UUID id, @RequestBody Exam exam){
-      examService.updateExamById(id, exam);
+      examService.updateById(id, exam);
       return ResponseEntity.ok().build();
     }
 

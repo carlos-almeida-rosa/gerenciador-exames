@@ -7,6 +7,6 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Repository
-public interface ExamRepository extends JpaRepository<Exam, UUID> {
-  Optional<Exam> findById(Long id);
+public interface ExamRepository extends JpaRepository<Exam, UUID>  {
+  Optional<Exam> findById(UUID id);
 }

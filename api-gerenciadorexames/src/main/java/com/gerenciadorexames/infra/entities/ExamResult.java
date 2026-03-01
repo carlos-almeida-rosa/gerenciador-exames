@@ -23,6 +23,7 @@ public class ExamResult {
   @Column(nullable = true)
   private Double obtainedValue;
 
+  @Column(name = "flag_changed", nullable = false)
   private boolean flagChanged;
 
   @ManyToOne
